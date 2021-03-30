@@ -23,14 +23,6 @@ public class BaseTestClass {
         reCreateScreenshotsFolder();
     }
 
-    @Test
-    public void firstTest(){
-        goToUrl(Constants.BASE_URL);
-        String expectedTitle = "Welcome to our stor";
-        String topicTitle = WebDriverHolder.getDriver().findElement(By.cssSelector(".topic-block-title >h2")).getText();
-        Assert.assertEquals(expectedTitle,topicTitle, "Wrong title!!!");
-    }
-
     @AfterSuite
     public void afterSuite() {
         if (WebDriverHolder.getDriver() != null) {
