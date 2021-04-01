@@ -8,29 +8,34 @@ import org.ohubska.pageobjects.LoginPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class LogoutTest extends BaseTestClass {
+public class LoginLogoutTests extends BaseTestClass{
 
     BasePage basePage;
     LoginPage loginPage;
     LoggedInPage loggedInPage;
-    WebElement login;
+    String email = "qahubska@gmail.com";
+    String password = "Password12345@";
 
-    @BeforeMethod
-    public void beforeClass(){
+    @BeforeClass
+    public void beforeClass() {
         goToUrl(Constants.BASE_URL);
         basePage= new BasePage();
-        login = WebDriverHolder.getDriver().findElement(By.xpath("//a[@class='ico-login']"));
-        login.click();
-    }
+        }
 
-    @Test
+    @Test(priority = 1)
     public void successfullLogin(){
-        loginPage = new LoginPage().waitTillPageIsLoaded();
-        loggedInPage=loginPage.successfulLogin(Constants.EMAIL,Constants.PASSWORD).waitTillPageIsLoaded();
+        loginPage = basePage.pressLoginLink().waitTillPageIsLoaded();
+        loggedInPage=loginPage.successfulLogin(email,password).waitTillPageIsLoaded();
+        Assert.assertEquals(loggedInPage.getTextOfFirstHeaderLink(),"My account");
+        }
+
+    @Test(priority = 2)
+    public void logoutTest(){
         basePage=loggedInPage.logout();
         Assert.assertEquals(basePage.getTextOfFirstHeaderLink(),"Register");
     }
+
 }
