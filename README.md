@@ -1,6 +1,12 @@
 # ohubskaRepo
 Framework for automation testing of web store "nopCommerce" (http://54.37.125.177/).
 
+#Released tests
+
+Successfull login test
+
+Logout test
+
 #Program installation
 Clone repository to local directory
 

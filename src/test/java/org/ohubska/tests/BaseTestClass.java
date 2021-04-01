@@ -6,10 +6,7 @@ import org.ohubska.driver.WebDriverHolder;
 import org.ohubska.listeners.TestListener;
 import org.openqa.selenium.By;
 import org.testng.Assert;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Listeners;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import org.uncommons.reportng.HTMLReporter;
 
 import java.io.File;
@@ -23,15 +20,7 @@ public class BaseTestClass {
         reCreateScreenshotsFolder();
     }
 
-    @Test
-    public void firstTest(){
-        goToUrl(Constants.BASE_URL);
-        String expectedTitle = "Welcome to our stor";
-        String topicTitle = WebDriverHolder.getDriver().findElement(By.cssSelector(".topic-block-title >h2")).getText();
-        Assert.assertEquals(expectedTitle,topicTitle, "Wrong title!!!");
-    }
-
-    @AfterSuite
+    @AfterClass
     public void afterSuite() {
         if (WebDriverHolder.getDriver() != null) {
             WebDriverHolder.getDriver().quit();
